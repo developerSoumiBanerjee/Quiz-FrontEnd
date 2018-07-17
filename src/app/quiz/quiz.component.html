@@ -1,0 +1,51 @@
+<app-navbar></app-navbar>
+<div class="continer" style="min-height: 750px;background-repeat: no-repeat; background-size: cover">
+<div class="row" *ngIf="quizService.qns && this.quizService.qnProgress != 10">
+  <div class="col s8 offset-s2">
+    <span>Time Elapsed : {{quizService.displayTimeElapsed()}}</span>
+    <div class="progress">
+      <div class="determinate"[style.width.%]="(quizService.qnProgress+1)*10" style=" background-color: green;"></div>
+    </div>
+    <div class="card" style="background-color: #00f0">
+      <div class="card-content" style=" background-color: #6da731;">
+        <span class="card-title" style="display: inline;">{{quizService.qnProgress+1}}. {{quizService.qns[quizService.qnProgress].questions}}</span>
+        
+        <div *ngIf="quizService.qns[quizService.qnProgress].imageName!=null">
+          <img class="center" [src]="quizService.rootUrl+'/assets/img/'+quizService.qns[quizService.qnProgress].imageName" style="width:350px;height:200px">
+        </div>
+      </div>
+      <div class="card-action">
+        <ul class="collection answer" >
+          <ng-container *ngFor="let option of quizService.qns[quizService.qnProgress].options;let i = index">
+            <li *ngIf="option != null" class="collection-item" [ngClass]="{'active': selectedItem == i}" 
+            (click)="select(i)" >
+              {{option}}
+            </li>
+             
+          </ng-container>
+            
+        </ul>
+
+          <div *ngIf="this.selectedItem!=-1">
+               <button class="btn" (click)="Answer(quizService.qns[quizService.qnProgress].question_no)">Next ></button>
+          </div>
+
+            <div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <p>Sorry, you are moved out of the quiz!</p>
+    <button class="btn" (click)="done(quizService.qns[quizService.qnProgress].question_no)">Okay</button>
+  </div>
+
+</div>
+
+
+      </div>
+    </div>
+</div>
+
+  </div>
+</div>

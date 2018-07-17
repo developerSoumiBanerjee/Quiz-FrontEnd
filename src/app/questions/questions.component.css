@@ -1,0 +1,38 @@
+.col s4{
+    text-decoration-color: black;
+}
+
+th{
+    background-color: #5aa22d;
+    border: 1px solid grey;
+    text-align: center;
+    padding: 1%;
+}
+tr, td{
+  border: 1px solid grey;
+  text-align: center;
+}
+thead{
+    color:white;
+    align: center;
+}
+.waves-effect{
+    background-color: #245208;
+    margin: 2px;
+
+}
+.delete{
+    color: red;
+    margin: 2px;
+}
+table{
+  width:98%;
+  margin-left: 1%;
+  border: 1px solid grey;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 5), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.modal{
+  background-color: transparent;
+  width: auto;
+  max-height: none;
+}

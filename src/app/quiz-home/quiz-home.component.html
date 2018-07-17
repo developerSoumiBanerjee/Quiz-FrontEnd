@@ -1,0 +1,77 @@
+<app-navbar></app-navbar>
+  <div class="continer" style=" min-height: 750px; background-repeat: no-repeat; background-size: cover">
+
+<div class="row">
+    <div class="col s12 m6 l3" style="height: 100vh"> 
+
+      <div class="card" style="margin-top: 0px;">
+      <div class="card-content black-text"     style="text-align: center;">
+        <span class="card-title" style="color:white !important">Your Quizes</span>
+       <span> 
+        <br>
+        
+          </span>
+      </div>
+      <div class="card-action">
+          <div class="card-content" *ngFor = "let options of courses" style="background-color: #ffffff00">
+            <div class="divider"></div>
+        <div class="section" >
+          <a (click)="staticModal.show()">Quiz : {{options.course_name}} </a>
+          <p>Update or Add Questions</p>
+        </div>
+          <!--<button class="btn waves-effect waves-light" (click)="staticModal.show()" style=" width: 40%;">
+               Quiz : {{options.course_name}} 
+          </button>-->
+
+          <div class="modal fade" bsModal #staticModal="bs-modal" [config]="{backdrop: 'static'}"
+               tabindex="-1" role="dialog" aria-labelledby="dialog-static-name">
+            <div class="modal-dialog modal-sm">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 id="dialog-static-name" class="modal-title pull-left">Directions</h4>
+                  
+                </div>
+                <div class="modal-body">
+                  <ul>
+                    <li>10 questions with 30sec. </li>
+                    <li>You cannot shift from the present window, else the quiz will stop.</li>
+                  </ul>
+                </div>
+                <div class="modal-body">
+                  <button class="btn waves-effect waves-light" (click)="startQuiz(options.course_id)">
+                    I have read
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          </div>
+      </div>
+    </div>
+
+
+      
+      </div>
+      <div class="col s12 m8 l9">
+            <div class="" style="    text-align: center;
+    font-size: x-large;
+    line-height: 2;">
+            <div class="black-text"     style="text-align: center;">
+              <span class="card-title">Welcome {{quizService.getParticipantName()}}!!</span>
+             <span> <p>Please select one of the below mentioned quizes</p>
+              <br>
+              
+                </span>
+            </div>
+    </div>
+
+      </div>
+
+    </div>
+
+
+
+
+
+</div>
+

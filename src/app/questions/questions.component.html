@@ -1,0 +1,123 @@
+<app-nav-bar></app-nav-bar>
+<div class="continer" style="min-height: 750px;  background-repeat: no-repeat; background-size: cover">
+<div class="row" style="background-color: #5aa22d87">
+  <div class="col s4" style="margin:2%;">
+  <p><b>Course Select</b></p>
+  <select class="browser-default" (click)="viewQues()" [(ngModel)]="selectedOption">
+    <option value="" disabled selected>Choose your course</option>
+    <option *ngFor="let course of courses" 
+    [value]="course.course_id" 
+    >
+  {{course.course_name}}
+</option>
+  </select>
+</div>
+
+ <div class="col s6 push-s6" style="margin-top:3%;"> 
+   <a class="btn-floating btn-large waves-effect waves-light red" style="background-color: #5aa22d !important;" (click)="staticModal.show()"><i class="material-icons">add</i></a>
+
+   <div class="modal fade" bsModal #staticModal="bs-modal" 
+     tabindex="-1" role="dialog" aria-labelledby="dialog-static-name">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 id="dialog-static-name" class="modal-title pull-left">Directions</h4>
+        
+      </div>
+      <div class="modal-body">
+       <form #quesForm="ngForm" (ngSubmit)="addQues(Question,Answer,selectedOption,option1,option2,option3,option4)">
+            <div class="row">
+              <div class="input-field col s12">
+                
+                <input type="text" name="Question" [(ngModel)]="Question"  required>
+                <label>Question</label>
+              </div>
+            </div>
+              
+            <div class="row">
+              <div class="input-field col s12">
+                
+                <input type="number" name="Answer" [(ngModel)]="Answer" required>
+                <label>Answer Sequence</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12">
+                
+                <input type="text" name="option1" [(ngModel)]="option1" required>
+                <label>option1</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12">
+                
+                <input type="text" name="option2" [(ngModel)]="option2" required>
+                <label>option2</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12">
+                
+                <input type="text" name="option3" [(ngModel)]="option3" required>
+                <label>option3</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12">
+                
+                <input type="text" name="option4" [(ngModel)]="option4" required>
+                <label>option4</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12">
+                <button class="btn-large btn-submit waves-effect waves-light" type="submit">Start</button>
+              </div>
+            </div>
+          </form>
+      </div>
+      
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<div class="row"></div>
+<table  *ngIf="myVar">
+    <thead>
+      <tr>
+          
+          <th>Ouestion</th>
+          <th>Option1</th>
+          <th>Option2</th>
+          <th>Option3</th>
+          <th>Option4</th>
+          <th>Answer</th>
+          <th>Action</th>
+      </tr>
+    </thead>
+   
+    <tbody >
+      
+      <tr *ngFor="let option of questionsAdmin" >
+        <td><div *ngIf="!isEditable">{{option.questions}}</div><input type="text" [(ngModel)]="option.questions" *ngIf="isEditable" [value]="option.questions"></td>
+        <td ><div *ngIf="!isEditable">{{option.option1}}</div><input type="text" [(ngModel)]="option.option1" *ngIf="isEditable"></td>
+        <td><div *ngIf="!isEditable">{{option.option2}}</div><input type="text" [(ngModel)]="option.option2" *ngIf="isEditable"></td>
+        <td><div *ngIf="!isEditable">{{option.option3}}</div><input type="text" [(ngModel)]="option.option3" *ngIf="isEditable"></td>
+        <td><div *ngIf="!isEditable">{{option.option4}}</div><input type="text" [(ngModel)]="option.option4" *ngIf="isEditable"></td>
+         <td><div *ngIf="!isEditable">{{option.answer}}</div><input type="text" [(ngModel)]="option.answer" *ngIf="isEditable"></td>
+
+       
+        <td><a class="waves-effect waves-light btn" (click)="edit()"><i class="material-icons">
+            border_color
+            </i>Edit</a><a class="waves-effect waves-light btn delete" (click)="del(option)"><i class="material-icons">
+              delete
+              </i>Delete</a><a class="waves-effect waves-light btn" (click)="save(option)"><i class="material-icons">
+               done
+                </i>Save</a></td>
+      </tr>
+      
+    </tbody>
+  
+  </table>
+</div>

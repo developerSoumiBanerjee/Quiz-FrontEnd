@@ -1,0 +1,55 @@
+.row{
+        height: 100vh;
+        color:white;
+}
+
+.col s12 m6{
+    background-color: #5aa22d87;
+    width: 50%;
+    margin-left: 350px;
+    margin-top: 61px;
+    left: auto;
+    right: auto;
+}
+
+.card{
+    height: 100vh;
+  background-color: rgba(0, 0, 255, 0);
+   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 5), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+   background-color: #5aa22d87;
+}
+.card-content{
+    left: auto;
+    background-color: #356e11d4;
+    right: auto;
+
+}
+.waves-effect waves-light btn{
+    widows: 100px;
+
+}
+.col s6{
+    text-decoration-color: mintcream;
+}
+
+
+.waves-effect waves-light btn{
+    background-color: #356e11d4;
+
+}
+
+.section{
+    color: black;
+}
+
+.waves-effect{
+    background-color: #356e11d4;
+} 
+a{
+    color: #ffff !important;
+}
+.modal{
+    background-color: transparent;
+    width: auto;
+    max-height: none;
+}

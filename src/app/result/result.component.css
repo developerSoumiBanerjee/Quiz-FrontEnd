@@ -1,0 +1,23 @@
+.card{
+  background-color: rgba(0, 0, 255, 0);
+   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 5), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+   color: white;
+}
+.btn{
+  background-color: white;
+  color:green;
+}
+.for{
+  color: white;
+}
+.card.horizontal{
+	width: 60%;
+    margin-left: 15%;
+    margin-top: 5%;
+    background-color: green;
+    color: white;
+}
+.myclass{
+	color: white !important;
+    margin-left: 18%;
+}

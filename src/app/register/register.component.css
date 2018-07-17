@@ -1,0 +1,74 @@
+button{
+  width:100%;
+ background-color: #6da731;
+}
+
+
+[type="radio"]:not(:checked), [type="radio"]:checked {
+     position: relative; 
+     opacity: 1; 
+     pointer-events: auto;
+}
+.ng-dirty ng-valid ng-touched{
+  color: skyblue;
+}
+.input-field input[type=text]:focus {
+     border-bottom: 1px solid #000;
+     box-shadow: 0 1px 0 0 #000;
+   }
+   input:-webkit-autofill {
+       -webkit-box-shadow: 0 0 0 100px #fff inset;
+       -moz-box-shadow: 0 0 0 100px #fff inset;
+       box-shadow: 0 0 0 100px #fff inset;
+   }
+.prefix.active{
+  color: green;
+}
+
+  input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
+    background-color: green;
+}
+.card{
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 5), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+card-content{
+    width: 50%;
+    margin-left: 350px;
+    margin-top: 61px;
+    left: auto;
+    right: auto;
+}
+.col s12 m6{
+    width: 50%;
+    margin-left: 350px;
+    margin-top: 61px;
+    left: auto;
+    right: auto;
+}
+.waves-effect waves-light btn{
+    background-color: green;
+
+}
+
+.waves-effect{
+    background-color: green;
+}
+label{
+      font-size: 12px;
+}
+.carousel{
+  height: 500px;
+}
+.nav-extended{
+   background-color: #6da731;
+      margin-left: 3%;
+}
+.modal{
+  background-color: transparent;
+  width: auto;
+  max-height: none;
+      margin-top: 15%;
+    margin-left: 40%;
+    -webkit-box-shadow: none;
+     box-shadow: none;
+}
