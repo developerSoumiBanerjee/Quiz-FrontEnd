@@ -23,12 +23,12 @@ export class QuizComponent implements OnInit {
       this.router.navigate(['/result']);
     }
 
-    /*$(window).blur(function(e){
+    $(window).blur(function(e){
       console.log('done');
       e.preventDefault();
        $("#myModal").show("slow");
      
-      });*/
+      });
      
     
       if(JSON.parse(localStorage.getItem('status'))==null){
