@@ -3,7 +3,10 @@
     width: auto;
     margin: 10px;
 }
-
+checkbox {
+    opacity:999;
+    pointer-events: all;
+}
 /* The Modal (background) */
 .modal {
     display: none; /* Hidden by default */

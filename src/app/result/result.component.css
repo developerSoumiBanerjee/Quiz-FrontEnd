@@ -6,6 +6,7 @@
 .btn{
   background-color: white;
   color:green;
+  box-sizing: border-box;
 }
 .for{
   color: white;

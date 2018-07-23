@@ -20,10 +20,10 @@ export class QuizService {
   constructor(private http: HttpClient,public router: Router) { }
 
   displayTimeElapsed() {
-   if ( this.seconds>=30 ){
+  /* if ( this.seconds>=30 ){
      this.seconds=0;
       this.router.navigate(['/result']);
-    }
+    }*/
     return Math.floor(this.seconds / 3600) + ':' + Math.floor(this.seconds / 60) + ':' + Math.floor(this.seconds % 60);
 
   }
@@ -64,8 +64,11 @@ export class QuizService {
 
   getQuestions(course:string) {
   var body = {
-      courseName: course
+     courseID:course,
+      userId:JSON.parse(localStorage.getItem('participantID'))
+
   }
+  console.log(body);
     return this.http.post(this.rootUrl + '/quiz/fetchQuestions',body);
   
   }
@@ -81,10 +84,11 @@ export class QuizService {
 
     for(var x=0;x<this.qns.length;x++)
     {
-       this.qnsAns[x]={question_no:0,answer:0,courseID:0,userId:0};
-       this.qnsAns[x].question_no=this.qns[x].question_no;
+       this.qnsAns[x]={question_no:0,answer:0,courseID:0,userId:0,resultId:0};
+       this.qnsAns[x].question_no=this.qns[x].qnId;
        this.qnsAns[x].answer=this.qns[x].answer;
-       this.qnsAns[x].courseID=this.qns[x].course_id;
+       this.qnsAns[x].courseID=this.qns[x].courseId;
+       this.qnsAns[x].resultId=this.qns[x].resultId;
        this.qnsAns[x].userId= JSON.parse(localStorage.getItem('participantID'));
     }
     console.log(this.qnsAns);
@@ -109,8 +113,8 @@ export class QuizService {
 
   }
 
- delQuestionsAdmin(question:any){
-     return this.http.post(this.rootUrl + '/deleteQuestions', question);
+ delQuestionsAdmin(qid:any){
+     return this.http.post(this.rootUrl + '/admin/deleteQuestions', qid);
 
   }
 
@@ -132,22 +136,11 @@ export class QuizService {
      return this.http.post(this.rootUrl + '/viewresult', body);
 
   }
-  addQuestionsAdmin(question:string,answer:string,course:string,option1:string,option2:string,option3:string,option4:string){
+  addQuestionsAdmin(body:any){
 
-  var body={
-    questions:question,
-    answer:answer,
-    course_id:course,
-    option1:option1,
-    option2:option2,
-    option3:option3,
-    option4:option4,
-    course_details:{
-      id:course
-    }
-  }
+  
   console.log(body);
-     return this.http.post(this.rootUrl + '/addQuestions', body);
+     return this.http.post(this.rootUrl + '/admin/addQuestions', body);
 
   }
 }

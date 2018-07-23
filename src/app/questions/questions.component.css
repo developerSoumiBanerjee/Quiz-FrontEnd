@@ -1,17 +1,28 @@
 .col s4{
     text-decoration-color: black;
 }
-
+checkbox {
+    opacity:999;
+    pointer-events: all !important;
+}
+.required:after { content:" *"; }
 th{
     background-color: #5aa22d;
     border: 1px solid grey;
-    text-align: center;
+   
     padding: 1%;
+}
+.contentType{
+  font-style: italic;
+  font-weight: bold;
 }
 tr, td{
   border: 1px solid grey;
-  text-align: center;
+  padding: 1%;
+  
 }
+tbody:nth-child(odd) { background: #f5f5f5;  border: solid 3px #908c8c; }
+tbody:nth-child(even) { background: #e5e5e5;  border: solid 3px #908c8c; }
 thead{
     color:white;
     align: center;
@@ -22,7 +33,7 @@ thead{
 
 }
 .delete{
-    color: red;
+    color: #c8a3a3;
     margin: 2px;
 }
 table{
@@ -35,4 +46,8 @@ table{
   background-color: transparent;
   width: auto;
   max-height: none;
+}
+a{
+  display: block;
+
 }

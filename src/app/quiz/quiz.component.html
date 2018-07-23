@@ -8,26 +8,34 @@
     </div>
     <div class="card" style="background-color: #00f0">
       <div class="card-content" style=" background-color: #6da731;">
-        <span class="card-title" style="display: inline;">{{quizService.qnProgress+1}}. {{quizService.qns[quizService.qnProgress].questions}}</span>
+        <span class="card-title" style="display: inline;">{{quizService.qnProgress+1}}. {{quizService.qns[quizService.qnProgress].qn}}</span>
         
         <div *ngIf="quizService.qns[quizService.qnProgress].imageName!=null">
           <img class="center" [src]="quizService.rootUrl+'/assets/img/'+quizService.qns[quizService.qnProgress].imageName" style="width:350px;height:200px">
         </div>
       </div>
       <div class="card-action">
-        <ul class="collection answer" >
+        <ul class="collection answer" *ngIf="false">
           <ng-container *ngFor="let option of quizService.qns[quizService.qnProgress].options;let i = index">
-            <li *ngIf="option != null" class="collection-item" [ngClass]="{'active': selectedItem == i}" 
-            (click)="select(i)" >
+            <li *ngIf="option != null" class="collection-item" [ngClass]="{'active': selectedItem[0] === option}" 
+            (click)="select(option)" >
               {{option}}
             </li>
              
           </ng-container>
             
         </ul>
-
-          <div *ngIf="this.selectedItem!=-1">
-               <button class="btn" (click)="Answer(quizService.qns[quizService.qnProgress].question_no)">Next ></button>
+         <ul class="collection answer" *ngIf="true" style="border: none;">
+          <ng-container *ngFor="let option of quizService.qns[quizService.qnProgress].options;let i = index">
+            <li>
+            <input type="checkbox" id={{i}} (change)="checkValue($event,option,i)" />
+            
+              <label for={{i}}>{{option}}</label>
+            </li>
+          </ng-container>
+        </ul>
+          <div *ngIf="this.selectedItem.length!=0" >
+               <button class="btn" (click)="Answer(quizService.qns[quizService.qnProgress].qnId)">Next ></button>
           </div>
 
             <div id="myModal" class="modal">
@@ -37,7 +45,7 @@
   <div class="modal-content">
     <span class="close">&times;</span>
     <p>Sorry, you are moved out of the quiz!</p>
-    <button class="btn" (click)="done(quizService.qns[quizService.qnProgress].question_no)">Okay</button>
+    <button class="btn" (click)="done(quizService.qns[quizService.qnProgress].qnId)">Okay</button>
   </div>
 
 </div>
