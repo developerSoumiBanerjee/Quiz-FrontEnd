@@ -1,6 +1,9 @@
 button{
   width:100%;
  background-color: #6da731;
+  
+    box-sizing: border-box;
+  
 }
 
 

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import{Router} from '@angular/router';
 import { QuizService } from '../shared/quiz.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-admin',
@@ -9,9 +10,10 @@ import { QuizService } from '../shared/quiz.service';
 })
 export class AdminComponent implements OnInit {
 
-  constructor(private router:Router, private quizService:QuizService) { }
+  constructor(private router:Router, private quizService:QuizService,private location:Location) { }
 
   ngOnInit() {
+    
   }
  public Update(){
   localStorage.clear();
@@ -21,7 +23,8 @@ export class AdminComponent implements OnInit {
  	 this.quizService.addCourse(course).subscribe(
         (data: any) => {
         if(data==true){
-        	  window.location.reload();
+          console.log(data);
+        	 location.reload();
         }
 
     }

@@ -45,7 +45,9 @@ export class QuestionsComponent implements OnInit {
   
   public save(question:any){
   this.isEditable=false;
+  console.log(question);
      this.quizService.updateQuestionsAdmin(question).subscribe(
+
         (data: any) => {
            this.router.navigate(['/questions']);
         }
@@ -86,7 +88,7 @@ console.log(question,answer,course);
  OptionNumber(qNo:number,question:string,num:number,courseid:number){
   for(var i=0;i<num;i++)
   {
-    var body={value:i};
+    var body={value:""};
     this.options.push(body);
   }
     this.qNo=qNo;
@@ -128,11 +130,13 @@ console.log(question,answer,course);
   checkValue(event,i){
   
   if(event.target.checked){
-    
-     this.ans[i]=this.options[i].value;
+    console.log(i,this.options[i].value);
+    if(this.ans.includes(this.options[i].value)==false)
+     this.ans.push(this.options[i].value);
   }
   else{
-     this.ans.splice(i, 1);;
+  var n=this.ans.indexOf(this.options[i].value);
+     this.ans.splice(n, 1);;
   }
   console.log(this.ans);
   }

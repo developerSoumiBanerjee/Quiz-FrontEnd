@@ -1,7 +1,7 @@
  
 <app-navbar></app-navbar>
 
-<div class="continer" style="min-height: 500px;  background-repeat: no-repeat; background-size: cover">
+<div class="continer" style="min-height: 500px;  background-repeat: no-repeat; background-size: cover; overflow: hidden;">
 <div class="row">
   <div class="col s8 offset-s2">
     <div class="card horizontal" *ngIf="!result">
@@ -9,7 +9,8 @@
         <div class="card-content" style="background-color: #6da731;">
           <table>
           <tr><td><h3>{{quizService.getParticipantName()}}</h3></td>
-          <td class="right-align"><h3>Time Elapsed : {{quizService.displayTimeElapsed()}}</h3></td></tr>
+
+          <td class="right-align" *ngIf="quizService.seconds!=undefined"><h3>Time Elapsed : {{quizService.displayTimeElapsed()}}</h3></td></tr>
         </table>
         </div>
         <div class="card-action">
@@ -30,6 +31,9 @@
           <h2>Sorry, you didn't pass</h2>
           <span><h4 class="center align">Your Result is: {{quizService.percentage}}%</h4></span>
         </div>
+       < <a class="btn-floating halfway-fab waves-effect waves-light red" (click)="restart()">
+        <i class="material-icons">replay</i>
+      </a>
       </div>
   </div>
  <div class="myclass" *ngIf="quizService.percentage>=50" style="margin-left: 30%">

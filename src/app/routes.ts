@@ -17,5 +17,5 @@ export const appRoutes : Routes =[
 	{path:'viewresult',component:ViewResultComponent,canActivate : [AuthGuard]},
 	{path:'admin',component:AdminComponent},
 	{path: 'questions',component: QuestionsComponent},
-	{path:'',redirectTo:'/register',pathMatch:'full'}
+	{path:'',redirectTo:'register',pathMatch:'full'}
 ]

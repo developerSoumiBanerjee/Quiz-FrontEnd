@@ -18,7 +18,7 @@ export class QuizComponent implements OnInit {
   selectedItem = [];
   ans = [];
   ngOnInit() {
-  console.log(this.selectedItem);
+  console.log(this.selectedItem, this.quizService.seconds);
     if(JSON.parse(localStorage.getItem('status'))>0){
       this.router.navigate(['/result']);
     }
@@ -43,6 +43,7 @@ export class QuizComponent implements OnInit {
             (data: any) => {
             console.log(data);
               this.quizService.qns = data;
+              console.log(this.quizService.qns.length);
               if(this.quizService.seconds==0){
               this.startTimer();
               }
@@ -67,11 +68,14 @@ export class QuizComponent implements OnInit {
   }
   checkValue(event,option,i){
   if(event.target.checked){
-    console.log(option);
-     this.selectedItem[i]=option;
+      if(this.selectedItem.includes(option)==false)
+         console.log(option);
+         this.selectedItem.push(option);
   }
   else{
-     this.selectedItem.splice(i, 1);;
+
+    var n=this.ans.indexOf(option);
+     this.selectedItem.splice(n, 1);;
   }
   console.log(this.selectedItem);
   }
@@ -83,7 +87,7 @@ export class QuizComponent implements OnInit {
     localStorage.setItem('qns', JSON.stringify(this.quizService.qns));
     this.quizService.qnProgress++;
     localStorage.setItem('qnProgress', this.quizService.qnProgress.toString());
-    if (this.quizService.qnProgress == 2 ){//|| this.quizService.seconds>=30) {
+    if (this.quizService.qnProgress == this.quizService.qns.length  || this.quizService.seconds>=30) {
       clearInterval(this.quizService.timer);
       this.router.navigate(['/result']);
     }

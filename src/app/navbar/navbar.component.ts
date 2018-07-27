@@ -17,7 +17,9 @@ export class NavbarComponent implements OnInit {
   SignOut() {
     localStorage.clear();
     clearInterval(this.quizService.timer);
-    this.router.navigate(['/register']);
+    this.quizService.seconds = 0;
+    this.quizService.qnProgress = 0;
+    this.router.navigate(['/']);
   }
 
 }

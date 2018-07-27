@@ -2,9 +2,9 @@
 <div class="continer" style="min-height: 750px;  background-repeat: no-repeat; background-size: cover">
 <div class="row" style="background-color: #5aa22d87">
   <div class="col s4" style="margin:2%;">
-  <p><b>Course Select</b></p>
+  <p><b>Please Select Course</b></p>
   <select class="browser-default" (click)="viewQues()" [(ngModel)]="selectedOption">
-    <option value="" disabled selected>Choose your course</option>
+    <option value="" disabled selected>Please choose your course</option>
     <option *ngFor="let course of courses" 
     [value]="course.course_id" 
     >
@@ -16,7 +16,7 @@
  <div class="col s6 push-s6" style="margin-top:3%;"> 
    <a *ngIf="selectedOption!=undefined" class="btn-floating btn-large waves-effect waves-light red" style="background-color: #5aa22d !important;" (click)="staticModal1.show()"><i class="material-icons">add</i></a>
 
-    <div class="modal fade" id="quesModal" bsModal #staticModal1="bs-modal" 
+    <div class="modal fade" id="quesModal" bsModal #staticModal1="bs-modal" [config]="{backdrop: 'true'}"
      tabindex="-1" role="dialog" aria-labelledby="dialog-static-name">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -59,7 +59,7 @@
       </div>
     </div>
   </div>
- <div id="Optmodal" class="modal" bsModal #staticModal="bs-modal" 
+ <div id="Optmodal" class="modal" bsModal #staticModal="bs-modal" [config]="{backdrop: 'true'}"
      tabindex="-1" role="dialog" aria-labelledby="dialog-static-name">
 
   <!-- Modal content -->
@@ -94,7 +94,7 @@
           </div>
             <div class="row">
               <div class="input-field col s12">
-                <button class="btn-large btn-submit waves-effect waves-light" type="submit">Start</button>
+                <button class="btn-large btn-submit waves-effect waves-light" type="submit">Submit Question</button>
               </div>
             </div>
           </form>
@@ -128,15 +128,15 @@
         <td class="contentType">Question No</td>
         <td> {{option.qno}}</td>
          <td rowspan="4">
-          <!--<a class="waves-effect waves-light btn" (click)="edit()"><i class="material-icons">
+          <a class="waves-effect waves-light btn" (click)="edit()"><i class="material-icons">
             border_color
-          </i>Edit</a>-->
+          </i>Edit</a>
           <a class="waves-effect waves-light btn delete" (click)="del(option.qnId)"><i class="material-icons">
           delete
           </i>Delete</a>
-          <!--<a class="waves-effect waves-light btn" (click)="save(option)"><i class="material-icons">
+          <a class="waves-effect waves-light btn" (click)="save(option)"><i class="material-icons">
           done
-          </i>Save</a>-->
+          </i>Save</a>
           </td>
         </tr>
         <tr>
@@ -149,8 +149,8 @@
           <td ><p>Options Are:</p>
             <ol  style="list-style-type:disc !important">
             <ng-container *ngFor="let optionVar of option.options">
-             <li> <div *ngIf="!isEditable">{{optionVar}}</div> </li>
-              <input type="text"  *ngIf="isEditable">
+             <li> <div *ngIf="!isEditable">{{optionVar.optionsValue}}</div> </li>
+              <input type="text"  [(ngModel)]="optionVar.optionsValue" *ngIf="isEditable" [value]="optionVar.optionsValue">
             </ng-container>
           </ol>
           </td>
@@ -162,8 +162,8 @@
            
           <ol  style="list-style-type:disc !important">
             <ng-container *ngFor="let ans of option.answer">
-             <li> <div *ngIf="!isEditable">{{ans}}</div> </li>
-              <input type="text"  *ngIf="isEditable">
+             <li> <div *ngIf="!isEditable">{{ans.answer}}</div> </li>
+              <input type="text"  [(ngModel)]="ans.answer" *ngIf="isEditable" [value]="ans.answer">
             </ng-container>
           </ol>
         </td>

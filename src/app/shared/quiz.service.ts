@@ -20,10 +20,10 @@ export class QuizService {
   constructor(private http: HttpClient,public router: Router) { }
 
   displayTimeElapsed() {
-  /* if ( this.seconds>=30 ){
+   if ( this.seconds>=30 ){
      this.seconds=0;
       this.router.navigate(['/result']);
-    }*/
+    }
     return Math.floor(this.seconds / 3600) + ':' + Math.floor(this.seconds / 60) + ':' + Math.floor(this.seconds % 60);
 
   }
@@ -109,7 +109,7 @@ export class QuizService {
 
   }
   updateQuestionsAdmin(question:any){
-     return this.http.post(this.rootUrl + '/updateQuestions', question);
+     return this.http.post(this.rootUrl + '/admin/updateQuestions', question);
 
   }
 

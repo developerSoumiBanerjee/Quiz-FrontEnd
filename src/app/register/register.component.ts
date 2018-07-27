@@ -16,6 +16,7 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit() {
       localStorage.clear();
+        
 
  
   }
@@ -43,7 +44,7 @@ export class RegisterComponent implements OnInit {
   OnSubmitLogin(name:string,password:string,role:string){
     localStorage.clear();
     localStorage.setItem('participant',name);
-    if(role==='User')
+    if(role==='User' && name!=undefined)
     {
     console.log(name,password,role);
         this.quizService.loginUser(name,password).subscribe(

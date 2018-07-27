@@ -35,7 +35,7 @@ import { ViewResultComponent } from './view-result/view-result.component';
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(appRoutes),
+    RouterModule.forRoot(appRoutes,{useHash: true}),
     HttpClientModule,
     FormsModule,
     ModalModule.forRoot()

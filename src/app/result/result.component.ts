@@ -18,6 +18,7 @@ export class ResultComponent implements OnInit {
   }
   result:boolean;
   ngOnInit() {
+
    localStorage.setItem('status', "1");
     this.result=false;
   }
@@ -39,12 +40,7 @@ export class ResultComponent implements OnInit {
       );
   }
 
-  restart() {
-    localStorage.setItem('qnProgress', "0");
-    localStorage.setItem('qns', "");
-    localStorage.setItem('seconds', "0");
-    this.router.navigate(['/quiz']);
-  }
+ 
 
   saveFile(blobContent: Blob, fileName: string)  {
    pdfMake.vfs = pdfFonts.pdfMake.vfs;
@@ -55,5 +51,11 @@ export class ResultComponent implements OnInit {
   
      pdfMake.createPdf(this.certificateService.certificateCreation( this.quizService.getParticipantName(), this.quizService.percentage)).download("Keystone_Certification_Details.pdf");
   }
-
+   restart() {
+    localStorage.setItem('qnProgress', "0");
+     localStorage.setItem('status', "0");
+    localStorage.setItem('qns', "");
+    localStorage.setItem('seconds', "0");
+    this.router.navigate(['/startquiz']);
+  }
 }
