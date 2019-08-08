@@ -45,11 +45,24 @@
 .waves-effect{
     background-color: #356e11d4;
 } 
-a{
+a, h4{
     color: #ffff !important;
+}
+p, td {
+    color: #487e26 !important;
 }
 .modal{
     background-color: transparent;
     width: auto;
     max-height: none;
+}
+th{
+    background-color: #487e26;
+}
+td, th {
+    padding: 5px;
+}
+table{
+    margin-top: 5%;
+    margin-left:3%;
 }

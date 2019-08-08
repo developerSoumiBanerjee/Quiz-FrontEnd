@@ -10,8 +10,9 @@ import * as $ from 'jquery';
 })
 export class QuestionsComponent implements OnInit {
  
- questionsAdmin:any;
- courses:any;
+ //numPattern = "^[1-9]+[0-9]*$";
+ questionsAdmin=[];
+ courses=[];
  options=[];
  finalOptions=[];
  ans=[];
@@ -23,13 +24,15 @@ export class QuestionsComponent implements OnInit {
   myVar = false;
   selectedOption:any;
   ngOnInit() {
-
+  //this.selectedOption="Sele";
     this.quizService.getCourses().subscribe(
         (data: any) => {
         console.log("data",data);
          this.courses=data;
         }
       );
+
+    
 
   }
  
@@ -64,14 +67,28 @@ export class QuestionsComponent implements OnInit {
       );
   }
   viewQues(){
+   this.myVar=false;
   console.log(this.myVar, this.selectedOption);
+  console.log(this.courses.length);
+  for(var i=0;i<this.courses.length;i++)
+  {
+   console.log(this.courses[i].course_id,this.courses[i]);
+    if(this.courses[i].course_id===parseInt(this.selectedOption))
+    {
+      this.courseName=this.courses[i].course_name;
+      console.log(this.courseName);
+    }
+    
+  }
 
   if( this.selectedOption!=undefined){
     this.quizService.getQuestionsAdmin(this.selectedOption).subscribe(
         (data: any) => {
-        this.myVar=true;
+       
         console.log("data",data);
           this.questionsAdmin = data;
+           if( this.questionsAdmin.length>0)
+              this.myVar=true;
           console.log(this.questionsAdmin,"data");
         }
       );
@@ -94,7 +111,8 @@ console.log(question,answer,course);
     this.qNo=qNo;
     this.question=question;
     this.selectedOption=courseid;
-    this.courseName=this.courses[courseid-1].course_name;
+    console.log(this.courses,this.courses[courseid-1],courseid);
+    //this.courseName=this.courses[courseid-1].course_name;
     console.log(this.options);
     $(document).ready(function(){
       $('#quesModal').hide("slow");

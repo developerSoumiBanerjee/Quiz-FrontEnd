@@ -1,8 +1,8 @@
 <nav class = "black">
     <div class="nav-wrapper" >
 
-      <img src="/assets/img/header.png" style="height:50px;">
-       <span class="brand-logo" style="margin-left: 35%;" >Keystone Quiz</span>
+      <!-- <img src="/assets/img/header.png" style="height:50px;"> -->
+       <span class="brand-logo" style="margin-left: 40%;" >CBO MasterMind Quiz</span>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
 
       </ul>
@@ -16,8 +16,8 @@
     
     <div class="nav-content">
       <ul class="tabs tabs-transparent">
-        <li class="tab"><a class="active"  href="#test1">Login</a></li>
-        <li class="tab"><a href="#test2">Register</a></li>
+        <li class="tab"><a class="active"   (click)="onClick1()">Login</a></li>
+        <li class="tab"><a  (click)="onClick()">Register</a></li>
         
       </ul>
     </div>
@@ -31,30 +31,30 @@
       </div>
 
       <div class="card-content">
-          <form #loginForm="ngForm" (ngSubmit)="OnSubmitLogin(Name,Password,Role)">
+          <form #loginForm="ngForm" (ngSubmit)="OnSubmitLogin(Name,Password)">
             <div class="row">
               <div class="input-field col s12">
                 <i class="material-icons prefix">account_circle</i>
-                <input type="text" name="Name" [(ngModel)]="Name"  required>
+                <input type="text" name="Name" [(ngModel)]="Name"  autocomplete="off" required>
                 <label>Name</label>
               </div>
             </div>
-              <div class="row">
+              <!-- <div class="row">
                 <div class="input-field col s12">
-               <span> <i class="material-icons prefix">mail_outline</i>  <span style="margin-left: 30px;">Role
+               <span> <i class="material-icons prefix">supervisor_account</i>  <span style="margin-left: 30px;">Role
                </span> </span><br>
                <div style="margin: 2%; margin-left: 5%;">
                 <input type="radio" name="Role" value="Admin"  [(ngModel)]="Role" required>Admin
-
+              
                 <input type="radio" name="Role" value="User"  [(ngModel)]="Role" required>User
               </div>
                 </div>
-
-            </div>
+              
+                          </div> -->
             <div class="row">
               <div class="input-field col s12">
                 <i class="material-icons prefix">security</i>
-                <input type="password" name="Password" [(ngModel)]="Password" required>
+                <input type="password" name="Password" [(ngModel)]="Password" autocomplete="off" required>
                 <label>Password</label>
               </div>
             </div>
@@ -82,21 +82,21 @@
             <div class="row">
               <div class="input-field col s12">
                 <i class="material-icons prefix">account_circle</i>
-                <input type="text" name="NameAdmin" #NameAdmin ngModel required>
+                <input type="text" name="NameAdmin" #NameAdmin ngModel required  autocomplete="off">
                 <label>Name</label>
               </div>
             </div>
             <div class="row">
               <div class="input-field col s12">
                 <i class="material-icons prefix">contact_mail</i>
-                <input type="text" name="Email" #Email ngModel required [pattern]="emailPattern">
+                <input type="text" name="Email" #Email ngModel required [pattern]="emailPattern"  autocomplete="off">
                 <label>Email</label>
               </div>
             </div>
             <div class="row">
               <div class="input-field col s12">
                 <i class="material-icons prefix">security</i>
-                <input type="password" name="PasswordAdmin" #PasswordAdmin ngModel required>
+                <input type="password" name="PasswordAdmin" #PasswordAdmin ngModel required  autocomplete="off">
                 <label>Password</label>
               </div>
             </div>
@@ -142,7 +142,7 @@
       </div>
     
       <div class="item">
-        <img src="/assets/img/img2.png" alt="New york" style="width:100%;height: 500px">
+        <img src="/assets/img/home.jpg" alt="New york" style="width:100%;height: 500px">
       </div>
     </div>
 
@@ -162,9 +162,22 @@
   <!-- Modal content -->
   
   <div class="modal-content modal-sm">
-    <span class="close">&times;</span>
+    <span class="close" (click)="close()">&times;</span>
     <p>You have entered wrong credential</p>
     <button class=" btn" (click)="close()" >Okay</button>
+  </div>
+
+</div>
+ <div id="myModalLoader" class="modal">
+
+  <!-- Modal content -->
+  
+  <div class="modal-content modal-sm">
+  <p>Enter the token sent to your mail</p>
+    <form #verifyForm="ngForm" (ngSubmit)="verify(token.value)">
+     <input type="text" name="token" #token ngModel required>
+      <button class="btn-medium btn-submit waves-effect waves-light" type="submit" >Okay</button>
+    </form>
   </div>
 
 </div>

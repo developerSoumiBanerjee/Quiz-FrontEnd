@@ -19,6 +19,8 @@ import { AdminComponent } from './admin/admin.component';
 import { QuestionsComponent } from './questions/questions.component';
 import * as $ from 'jquery';
 import { ViewResultComponent } from './view-result/view-result.component';
+import { LoadingModule } from 'ngx-loading';
+import { ClickOutsideModule } from 'ng-click-outside';    
 
 @NgModule({
   declarations: [
@@ -37,8 +39,10 @@ import { ViewResultComponent } from './view-result/view-result.component';
     BrowserModule,
     RouterModule.forRoot(appRoutes,{useHash: true}),
     HttpClientModule,
+    LoadingModule,
     FormsModule,
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    ClickOutsideModule
   ],
   providers: [QuizService,AuthGuard,CertificateService],
   bootstrap: [AppComponent]

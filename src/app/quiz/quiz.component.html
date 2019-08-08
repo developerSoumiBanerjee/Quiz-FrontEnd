@@ -1,25 +1,100 @@
-<app-navbar></app-navbar>
-<div class="continer" style="min-height: 750px;background-repeat: no-repeat; background-size: cover">
-<div class="row" *ngIf="quizService.qns && this.quizService.qnProgress != 10">
+<style>
+.loadWrapper {  
+    background: rgba(0,0,0,0.3);  
+    width: 100%;  
+    height: 100%;  
+    position: fixed;  
+    margin-top:5%;
+    top:0px;  
+    left:0px;  
+    z-index: 99999;  
+}  
+.loader {
+    border: 5px solid #f3f3f3; /* Light grey */
+    border-top: 5px solid #3d3e3f; /* gray */
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+</style>
+<nav class = "black">
+    <div class="nav-wrapper">
+     
+     <img src="/assets/img/header.png" style="height:50px;">
+       <span class="brand-logo" style="margin-left: 40%;" >CBO MasterMind Quiz</span>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a (click)="restart()" style="font-size: large; ">Home</a></li>
+        <li><a (click)="SignOut()" style="font-size: large; ">Logout</a></li>
+        
+      </ul>
+      
+    </div>
+  </nav> 
+   
+<div class="loadWrapper" *ngIf="showProgress">  
+  <div class="loader"></div>  
+</div>
+<div class="continer" *ngIf="!showProgress" style="background-image: url(/assets/img/home.jpg);height: 100vh">
+
+
+
+
+
+<div class="modal" role="dialog" style="overflow:unset;       max-height: none;  margin: auto;" [ngStyle]="{'display': quizService.displayTimeElapsed()<=1 ? 'block' : 'none' }" >
+     <div class="modal-dialog">
+
+     <div class="modal-content">
+      <div class="modal-header">
+        
+        <h4 class="modal-title">Oops!!</h4>
+      </div>
+  
+   <div class="modal-body">
+   <p>Sorry, you are moved out of the quiz!</p>
+ </div>
+ <div class="modal-footer" style="background-color: white">
+   <button class="btn center" (click)="done(quizService.qns[quizService.qnProgress].qnId)">Okay</button>
+   
+   </div>
+   </div> 
+
+
+</div>
+</div>
+
+
+<div class="row" *ngIf="quizService.qns && this.quizService.qnProgress != this.quizService.qns.length">
   <div class="col s8 offset-s2">
-    <span>Time Elapsed : {{quizService.displayTimeElapsed()}}</span>
+    <h2 style="font-style: oblique;
+    color: #fff;" [ngStyle]="{'display': quizService.displayTimeElapsed()<=1 ? 'none' : 'block' }" >Time Elapsed : {{quizService.displayTimeElapsed()}}</h2>
+
     <div class="progress">
-      <div class="determinate"[style.width.%]="(quizService.qnProgress+1)*10" style=" background-color: green;"></div>
+      <div class="determinate" [style.width.%]="((quizService.qnProgress+1)*100/this.quizService.qns.length)" style=" background-color: green;"></div>
     </div>
     <div class="card" style="background-color: #00f0">
+      <h4 class="card-title" style="    text-transform: capitalize;
+    text-align: center;
+    padding: 1%;color: white">{{quizService.qns[quizService.qnProgress].courseName}}</h4>
       <div class="card-content" style=" background-color: #6da731;">
         <span class="card-title" style="display: inline;">{{quizService.qnProgress+1}}. {{quizService.qns[quizService.qnProgress].qn}}</span>
         
-        <div *ngIf="quizService.qns[quizService.qnProgress].imageName!=null">
-          <img class="center" [src]="quizService.rootUrl+'/assets/img/'+quizService.qns[quizService.qnProgress].imageName" style="width:350px;height:200px">
-        </div>
+        
       </div>
       <div class="card-action">
         <ul class="collection answer" *ngIf="false">
           <ng-container *ngFor="let option of quizService.qns[quizService.qnProgress].options;let i = index">
             <li *ngIf="option != null" class="collection-item" [ngClass]="{'active': selectedItem[0] === option}" 
             (click)="select(option)" >
-              {{option}}
+             {{option}}
             </li>
              
           </ng-container>
@@ -28,9 +103,10 @@
          <ul class="collection answer" *ngIf="true" style="border: none;">
           <ng-container *ngFor="let option of quizService.qns[quizService.qnProgress].options;let i = index">
             <li>
-            <input type="checkbox" id={{i}} (change)="checkValue($event,option,i)" />
+
+            <input type="checkbox" id={{i}}  (change)="checkValue($event,option,i)"  />
             
-              <label for={{i}}>{{option}}</label>
+              <label for={{i}} style="font-size:medium;">{{option}}</label>
             </li>
           </ng-container>
         </ul>
@@ -38,17 +114,7 @@
                <button class="btn" (click)="Answer(quizService.qns[quizService.qnProgress].qnId)">Next ></button>
           </div>
 
-            <div id="myModal" class="modal">
-
-  <!-- Modal content -->
   
-  <div class="modal-content">
-    <span class="close">&times;</span>
-    <p>Sorry, you are moved out of the quiz!</p>
-    <button class="btn" (click)="done(quizService.qns[quizService.qnProgress].qnId)">Okay</button>
-  </div>
-
-</div>
 
 
       </div>

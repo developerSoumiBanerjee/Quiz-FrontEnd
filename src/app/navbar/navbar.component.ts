@@ -21,5 +21,15 @@ export class NavbarComponent implements OnInit {
     this.quizService.qnProgress = 0;
     this.router.navigate(['/']);
   }
+  restart() {
+    localStorage.setItem('qnProgress', "0");
+    localStorage.setItem('opt', "0");
+    localStorage.setItem('status', null);
+    localStorage.setItem('qns', "");
+   //localStorage.getItem('seconds' undefined);
+  // this.quizService.seconds=undefined;
+  clearInterval(this.quizService.timer );
+    this.router.navigate(['/startquiz']);
+  }
 
 }

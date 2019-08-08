@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Input  } from '@angular/core';
 import { QuizService } from '../shared/quiz.service';
 import {CertificateService } from '../certificate.service';
 import { Router } from '@angular/router';
@@ -13,14 +13,16 @@ import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 })
 export class ResultComponent implements OnInit {
 
+ @Input() showProgress:boolean = true;
   constructor(private quizService: QuizService, private router: Router,private certificateService:CertificateService) { 
      
   }
   result:boolean;
   ngOnInit() {
-
+  
    localStorage.setItem('status', "1");
     this.result=false;
+    this.OnSubmit();
   }
 
 
@@ -34,14 +36,19 @@ export class ResultComponent implements OnInit {
         (data: any) => {
         console.log(data);
           this.quizService.correctAnswerCount = data.correctAnswers;
-          this.quizService.percentage= data.percentage;
+          this.quizService.percentage= Math.round(data.percentage * 100) / 100;
+          this.showProgress=false;
 
         }
       );
   }
 
- 
+  SignOut(){
+   localStorage.clear();
+   this.router.navigate(['/register']);
 
+ }
+ 
   saveFile(blobContent: Blob, fileName: string)  {
    pdfMake.vfs = pdfFonts.pdfMake.vfs;
    // playground requires you to assign document definition to a variable called dd
@@ -53,9 +60,11 @@ export class ResultComponent implements OnInit {
   }
    restart() {
     localStorage.setItem('qnProgress', "0");
-     localStorage.setItem('status', "0");
+    localStorage.setItem('opt', "0");
+    localStorage.setItem('status', null);
     localStorage.setItem('qns', "");
-    localStorage.setItem('seconds', "0");
+   //localStorage.setItem('seconds', "0");
+    this.quizService.seconds=undefined;
     this.router.navigate(['/startquiz']);
   }
 }

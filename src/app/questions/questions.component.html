@@ -4,17 +4,19 @@
   <div class="col s4" style="margin:2%;">
   <p><b>Please Select Course</b></p>
   <select class="browser-default" (click)="viewQues()" [(ngModel)]="selectedOption">
-    <option value="" disabled selected>Please choose your course</option>
+    <option [ngValue]="Sele" disabled selected>Please choose your course</option>
     <option *ngFor="let course of courses" 
     [value]="course.course_id" 
     >
   {{course.course_name}}
 </option>
   </select>
+
 </div>
 
  <div class="col s6 push-s6" style="margin-top:3%;"> 
-   <a *ngIf="selectedOption!=undefined" class="btn-floating btn-large waves-effect waves-light red" style="background-color: #5aa22d !important;" (click)="staticModal1.show()"><i class="material-icons">add</i></a>
+  
+   <a *ngIf="selectedOption!=undefined" class="btn-floating btn-large waves-effect waves-light red" style="background-color: #5aa22d !important;" (click)="staticModal1.show()" title="Add questions"><i class="material-icons">add</i></a>
 
     <div class="modal fade" id="quesModal" bsModal #staticModal1="bs-modal" [config]="{backdrop: 'true'}"
      tabindex="-1" role="dialog" aria-labelledby="dialog-static-name">
@@ -29,7 +31,7 @@
         <div class="row">
               <div class="input-field col s12">
                 
-                <input type="number" name="qNo" [(ngModel)]="qNo"  required>
+                <input type="number" name="qNo" [(ngModel)]="qNo"  required  min="1" pattern="^[1-9]" oninput="validity.valid||(value='');"  step="1">
                 <label>Question No</label>
               </div>
             </div>
@@ -43,7 +45,7 @@
          <div class="row">
               <div class="input-field col s12">
                 
-                <input type="number" name="num" [(ngModel)]="num"  required>
+                <input type="number" name="num" [(ngModel)]="num"  required   min="1" pattern="^[1-9]" oninput="validity.valid||(value='');"  step="1">
                 <label>Number of Options</label>
               </div>
             </div>
@@ -110,13 +112,17 @@
 </div>
 </div>
 <div class="row"></div>
-<table  *ngIf="myVar">
+<table  *ngIf="myVar" >
     <thead>
 
       <tr>
           <th  WIDTH="80">Type</th>
           <th  WIDTH="200">Content</th>
-          <th  WIDTH="90">Action</th>
+          <th  WIDTH="90">Action <a class="waves-effect waves-light btn pull-right" style="    width: 30%;
+    display: inline;
+    height: 1%;"(click)="edit()"><i class="material-icons">
+            border_color
+          </i></a></th>
            
          
       </tr>
@@ -128,13 +134,11 @@
         <td class="contentType">Question No</td>
         <td> {{option.qno}}</td>
          <td rowspan="4">
-          <a class="waves-effect waves-light btn" (click)="edit()"><i class="material-icons">
-            border_color
-          </i>Edit</a>
-          <a class="waves-effect waves-light btn delete" (click)="del(option.qnId)"><i class="material-icons">
+          
+          <a class="waves-effect waves-light btn" (click)="del(option.qnId)"><i class="material-icons">
           delete
           </i>Delete</a>
-          <a class="waves-effect waves-light btn" (click)="save(option)"><i class="material-icons">
+          <a class="waves-effect waves-light btn"   (click)="save(option)"><i class="material-icons">
           done
           </i>Save</a>
           </td>
@@ -174,5 +178,6 @@
     </tbody>
   
   </table>
+  <h4  *ngIf= "questionsAdmin.length==0">No questions added to this course</h4>
 </div>
 

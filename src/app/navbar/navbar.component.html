@@ -1,11 +1,55 @@
-<nav class = "black">
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark" style="background-color:black;margin:auto;    border-radius: unset;">
     <div class="nav-wrapper">
      
-      <img src="/assets/img/header.png" style="height:50px;">
-       <span class="brand-logo" style="margin-left: 35%;" >Keystone Quiz</span>
-      <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <li><a (click)="SignOut()">Logout</a></li>
+      <!-- <img  class="navbar-brand" src="/assets/img/header.png" style="height:80px;margin-top: -1%"> -->
+       <!-- <span class="justify-content-center" >CBO Brainstorm Quiz</span> -->
+      <ul id="nav-mobile" class="navbar-nav" style="margin-left: 40%">
+        <li  class="nav-item "><h2 (click)="staticModal.show()" style="font-size: large;  ">CBO MasterMind Quiz</h2></li>
+       
         
       </ul>
+      <ul class="nav navbar-nav navbar-right" style="margin-right: auto">
+        <li><a (click)="restart()" style="font-size: large; ">Home</a></li>
+     <li class="nav-item mr-auto"><a (click)="staticModal.show()" style="font-size: large;">Logout</a></li>
+    </ul>
+      <div class="modal fade" bsModal #staticModal="bs-modal" [config]="{backdrop: 'static'}"
+               tabindex="-1" role="dialog" aria-labelledby="dialog-static-name">
+            <div class="modal-dialog modal-sm">
+              <div class="modal-content">
+                <div class="modal-header">
+                  
+                  <h4 id="dialog-static-name" class="modal-title pull-left" style="color: black;">Logout</h4>
+                  
+                </div>
+                <div class="modal-body">
+                  <ul>
+                    <li style="color: black;">Are you sure you want to logout?</li>
+                  </ul>
+                </div>
+                <div class="modal-body">
+                  <button class="btn waves-effect waves-light" (click)="SignOut()">
+                    Logout
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
     </div>
   </nav>
+
+  <!-- <nav class="navbar navbar-expand-sm bg-light">
+  
+  Links
+  <ul class="navbar-nav">
+    <li class="nav-item">
+      <a class="nav-link" href="#">Link 1</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">Link 2</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">Link 3</a>
+    </li>
+  </ul>
+  
+  </nav> -->

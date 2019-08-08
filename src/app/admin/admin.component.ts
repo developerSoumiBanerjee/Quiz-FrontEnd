@@ -12,7 +12,17 @@ export class AdminComponent implements OnInit {
 
   constructor(private router:Router, private quizService:QuizService,private location:Location) { }
 
+ 
+courses=[];
   ngOnInit() {
+
+  this.quizService.getCourses().subscribe(
+        (data: any) => {
+        console.log("data",data);
+         this.courses=data;
+          console.log("data",this.courses.length);
+        }
+      );
     
   }
  public Update(){
@@ -20,6 +30,8 @@ export class AdminComponent implements OnInit {
   this.router.navigate(['/questions']);
  }
  addCourse(course:string){
+ if(course.trim().length>=2)
+  location.reload();
  	 this.quizService.addCourse(course).subscribe(
         (data: any) => {
         if(data==true){

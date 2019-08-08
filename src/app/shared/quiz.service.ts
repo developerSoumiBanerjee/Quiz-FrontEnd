@@ -6,8 +6,8 @@ import { ActivatedRoute,Router } from '@angular/router';
 
 @Injectable()
 export class QuizService {
-  //---------------- Properties---------------
-  readonly rootUrl = 'http://localhost:8080';
+  //---------------- Properties--------------
+  readonly rootUrl = 'https://quizapplication-services.cfapps.io';
   qns: any[];
   qnsAns:AnswerCollection[]=[];
   seconds: number;
@@ -20,17 +20,16 @@ export class QuizService {
   constructor(private http: HttpClient,public router: Router) { }
 
   displayTimeElapsed() {
-   if ( this.seconds>=30 ){
-     this.seconds=0;
-      this.router.navigate(['/result']);
-    }
-    return Math.floor(this.seconds / 3600) + ':' + Math.floor(this.seconds / 60) + ':' + Math.floor(this.seconds % 60);
+   
+    let t=  this.seconds;
+   //console.log(t);
+    return 30-t;
 
   }
 
   getParticipantName() {
-    var participant = {Name:'Soumi Banerjeee'};
-    return participant.Name;
+    var participant =localStorage.getItem('name');
+    return participant;
   }
 
 
@@ -78,6 +77,12 @@ export class QuizService {
     return this.http.get(this.rootUrl + '/quiz/courses');
   
   }
+  getCoursesUser() {
+  
+    return this.http.get(this.rootUrl + '/quiz/courses');
+  
+  }
+  
 
   getAnswers() {
     var body = this.qns.map(x => x.QnID);
@@ -143,4 +148,17 @@ export class QuizService {
      return this.http.post(this.rootUrl + '/admin/addQuestions', body);
 
   }
+
+  verfiyToken(jsontoken:string,jsonid:string){
+  var body={
+  
+      jsontoken:jsontoken,
+      jsonid:jsonid
+    
+  };
+  console.log(body);
+     return this.http.post(this.rootUrl + '/verify', body);
+
+  }
+
 }
